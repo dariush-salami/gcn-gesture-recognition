@@ -5,7 +5,6 @@ import pickle
 import os
 import json
 from datetime import datetime
-from IPython import embed
 import tensorflow.contrib.slim as slim
 from scipy.sparse import coo_matrix
 
