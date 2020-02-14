@@ -42,7 +42,6 @@ def train():
         loss.backward()
         total_loss += loss.item() * 20
         optimizer.step()
-        print(total_loss)
     return total_loss / len(train_dataset)
 
 def test(loader):
@@ -54,7 +53,7 @@ def test(loader):
         batch = torch.arange(data.shape[0]).repeat_interleave(2048).to(device)
         with torch.no_grad():
             pred = model(data,batch).max(dim=1)[1]
-        correct += pred.eq(label).sum().item()
+        correct += pred.eq(label.flatten()).sum().item()
     return correct / len(loader.dataset)
 
 for epoch in range(1, 201):
@@ -62,3 +61,4 @@ for epoch in range(1, 201):
     test_acc = test(test_loader)
     print('Epoch {:03d}, Loss: {:.4f}, Test: {:.4f}'.format(
         epoch, loss, test_acc))
+
