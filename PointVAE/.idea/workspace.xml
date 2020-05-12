@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b44cd8ec-b79b-4329-b33d-74e71fa39667" name="Default Changelist" comment="" />
+    <list default="true" id="b44cd8ec-b79b-4329-b33d-74e71fa39667" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/layer.py" beforeDir="false" afterPath="$PROJECT_DIR$/layer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +19,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1blRmK7bbzjoLpO5ESw1NxXM1cO" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -22,8 +31,39 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ECCB/Layers.py" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/PointRNNGeo" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PointVAE" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -36,6 +76,8 @@
       <option name="presentableId" value="Default" />
       <updated>1589204851367</updated>
       <workItem from="1589204852693" duration="8587000" />
+      <workItem from="1589270242531" duration="3106000" />
+      <workItem from="1589274627564" duration="10399000" />
     </task>
     <servers />
   </component>
@@ -43,10 +85,55 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl" timestamp="1589208491012">
-      <screen x="67" y="27" width="1853" height="1053" />
+    <state x="2655" y="323" width="424" height="484" key="FileChooserDialogImpl" timestamp="1589281178721">
+      <screen x="1920" y="0" width="1920" height="1200" />
     </state>
+    <state x="2655" y="323" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589281178721" />
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1589208491012" />
+    <state width="1874" height="402" key="GridCell.Tab.0.bottom" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.0.bottom/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state width="1874" height="402" key="GridCell.Tab.0.center" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.0.center/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state width="1874" height="402" key="GridCell.Tab.0.left" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.0.left/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state width="1874" height="402" key="GridCell.Tab.0.right" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.0.right/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state width="1874" height="402" key="GridCell.Tab.1.bottom" timestamp="1589284911491">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.1.bottom/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911491" />
+    <state width="1874" height="402" key="GridCell.Tab.1.center" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.1.center/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state width="1874" height="402" key="GridCell.Tab.1.left" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.1.left/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state width="1874" height="402" key="GridCell.Tab.1.right" timestamp="1589284911490">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state width="1874" height="402" key="GridCell.Tab.1.right/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589284911490" />
+    <state x="482" y="187" key="SettingsEditor" timestamp="1589270274368">
+      <screen x="67" y="27" width="3773" height="1173" />
+    </state>
+    <state x="482" y="187" key="SettingsEditor/67.27.3773.1173@67.27.3773.1173" timestamp="1589270274368" />
+    <state x="2536" y="426" key="com.intellij.ide.util.TipDialog" timestamp="1589274627497">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state x="2536" y="426" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589274627497" />
+    <state x="2648" y="519" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1589279536857">
+      <screen x="1920" y="0" width="1920" height="1200" />
+    </state>
+    <state x="2648" y="519" width="454" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1589279536857" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -55,7 +142,20 @@
           <url>file://$PROJECT_DIR$/../DynamicEdge/main.py</url>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PointVAE$main.coverage" NAME="main Coverage Results" MODIFIED="1589284911471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

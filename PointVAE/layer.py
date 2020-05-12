@@ -2,6 +2,7 @@ from torch_geometric.nn import MessagePassing
 from torch_geometric.utils import add_self_loops,remove_self_loops
 import torch
 
+from torch_geometric.nn.inits import reset
 
 class MuConv(MessagePassing):
     def __init__(self, local_nn=None, global_nn=None, **kwargs):
