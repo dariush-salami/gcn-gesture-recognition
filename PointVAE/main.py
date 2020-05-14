@@ -36,6 +36,7 @@ class Net(torch.nn.Module):
         row, col = radius_graph(pos, self.r,
                           max_num_neighbors=64)
         edge_index = torch.stack([col, row], dim=0)
+        x = self.fc1(x)
         z_mu = self.mu_conv(x, (pos, pos), edge_index)
         z_sig = self.sig_conv(x,(pos, pos),edge_index)
 
@@ -46,9 +47,10 @@ class Net(torch.nn.Module):
         z_sig = global_max_pool(z_sig, batch)
 
         if self.training:
-            z =  z_mu + torch.randn_like(z_sig) * torch.exp(z_sig)
+            z = z_mu + torch.randn_like(z_sig) * torch.exp(z_sig)
         else:
-            z =  z_mu
+            z = z_mu
+
 
         pos = pos.new_zeros((x.size(0), 3))
         batch = torch.arange(x.size(0), device=batch.device)
@@ -62,16 +64,16 @@ class Net(torch.nn.Module):
 
 
 path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data/ShapeNet')
-pre_transform, transform = T.NormalizeScale(), T.SamplePoints(1024)
-train_dataset = ShapeNet(path,split='trainval' , pre_transform=pre_transform)
-test_dataset = ShapeNet(path,split='test' , pre_transform=pre_transform)
+pre_transform, transform = T.NormalizeScale(), T.FixedPoints(1024)
+train_dataset = ShapeNet(path, split='trainval', pre_transform=pre_transform, transform=transform)
+test_dataset = ShapeNet(path, split='test', pre_transform=pre_transform, transform=transform)
 
 # train_dataset = ModelNet(path, '10', True, transform, pre_transform)
 # test_dataset = ModelNet(path, '10', False, transform, pre_transform)
 train_loader = DataLoader(
-    train_dataset, batch_size=10, shuffle=True, num_workers=0)
+    train_dataset, batch_size=10, shuffle=True)
 test_loader = DataLoader(
-    test_dataset, batch_size=10, shuffle=False, num_workers=0)
+    test_dataset, batch_size=10, shuffle=False)
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model = Net(0.5,0.2).to(device)
@@ -102,4 +104,4 @@ def test(loader):
 
 
 for data in train_loader:
-   z =  model(data)
+    z = model(data)

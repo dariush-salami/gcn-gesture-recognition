@@ -80,7 +80,7 @@ class SigmaConv(MessagePassing):
 
         return self.propagate(edge_index, x=x, pos=pos)
 
-    def message(self, x_j, pos_i, pos_j):
+    def message(self,x_i,  x_j, pos_i, pos_j):
         if x_j is None:
             msg = pos_j - pos_i
         if x_j is not None:
