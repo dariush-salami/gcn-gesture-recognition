@@ -1,12 +1,14 @@
 import os.path as osp
 from torch_geometric.datasets import ModelNet, ShapeNet
 from layer import MuConv,SigmaConv
-from torch.nn import Sequential as Seq, Linear as Lin, ReLU, BatchNorm1d as BN
+from torch.nn import Sequential as Seq, Linear as Lin, ReLU, BatchNorm1d as BN, Dropout
 import torch_geometric.transforms as T
 from torch_geometric.data import DataLoader
 import torch
 from torch_geometric.nn import radius_graph , global_max_pool
-
+import matplotlib.pyplot as plt
+import numpy as np
+from neuralnet_pytorch.metrics import chamfer_loss
 def MLP(channels, batch_norm=True):
     return Seq(*[
         Seq(Lin(channels[i - 1], channels[i]), ReLU(), BN(channels[i]))
@@ -26,9 +28,8 @@ class Net(torch.nn.Module):
         self.Global_nn_sig = MLP([256 + 3, 256, 512, 1024])
 
 
-
-
-        #self.fc2 =
+        self.mlp = Seq(MLP([1024, 256]), Dropout(0.5), MLP([256, 128]),
+                       Dropout(0.5), Lin(128, 3))
 
     def forward(self, data):
         x , pos , batch = data.x , data.pos, data.batch
@@ -52,10 +53,14 @@ class Net(torch.nn.Module):
             z = z_mu
 
 
-        pos = pos.new_zeros((x.size(0), 3))
-        batch = torch.arange(x.size(0), device=batch.device)
+        # pos = pos.new_zeros((x.size(0), 3))
+        # batch = torch.arange(x.size(0), device=batch.device)
+        #out = self.lin1(torch.cat([x1, x2, x3], dim=1))
+        #out = self.mlp(out)
 
-        return z, pos, batch
+        #decoded = self.lin1(z)
+        decoded = self.mlp(z)
+        return decoded, z, pos, batch
 
 
 
@@ -65,8 +70,8 @@ class Net(torch.nn.Module):
 
 path = osp.join(osp.dirname(osp.realpath(__file__)), '..', 'data/ShapeNet')
 pre_transform, transform = T.NormalizeScale(), T.FixedPoints(1024)
-train_dataset = ShapeNet(path, split='trainval', pre_transform=pre_transform, transform=transform)
-test_dataset = ShapeNet(path, split='test', pre_transform=pre_transform, transform=transform)
+train_dataset = ShapeNet(path, split='trainval', pre_transform=pre_transform)
+test_dataset = ShapeNet(path, split='test', pre_transform=pre_transform)
 
 # train_dataset = ModelNet(path, '10', True, transform, pre_transform)
 # test_dataset = ModelNet(path, '10', False, transform, pre_transform)
@@ -80,15 +85,17 @@ model = Net(0.5,0.2).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 
-def train(epoch):
+def train():
     model.train()
-
+    total_loss = 0
     for data in train_loader:
         data = data.to(device)
         optimizer.zero_grad()
-        loss = (model(data), data.y)
+        loss = chamfer_loss(model(data), data.pos)
         loss.backward()
+        total_loss += loss.item() * data.num_graphs
         optimizer.step()
+    return total_loss / len(train_dataset)
 
 
 def test(loader):
@@ -103,5 +110,45 @@ def test(loader):
     return correct / len(loader.dataset)
 
 
-for data in train_loader:
-    z = model(data)
+for epoch in range(1, 201):
+    loss = train()
+    #test_acc = test(test_loader)
+    print('Epoch {:03d}, Loss: {:.4f}'.format(
+        epoch, loss))
+
+
+
+
+# for data in train_loader:
+#     z = model(data)
+
+# fig = plt.figure()
+#
+#
+# def randrange(n, vmin, vmax):
+#     '''
+#     Helper function to make an array of random numbers having shape (n, )
+#     with each number distributed Uniform(vmin, vmax).
+#     '''
+#     return (vmax - vmin)*np.random.rand(n) + vmin
+#
+# fig = plt.figure()
+# ax = fig.add_subplot(111, projection='3d')
+#
+# ax.scatter(train_dataset[3].pos[:,0],train_dataset[3].pos[:,1],train_dataset[3].pos[:,2])
+
+# n = 100
+
+# For each set of style and range settings, plot n random points in the box
+# defined by x in [23, 32], y in [0, 100], z in [zlow, zhigh].
+# for m, zlow, zhigh in [('o', -50, -25), ('^', -30, -5)]:
+#     xs = randrange(n, 23, 32)
+#     ys = randrange(n, 0, 100)
+#     zs = randrange(n, zlow, zhigh)
+#     ax.scatter(xs, ys, zs, marker=m)
+#
+# ax.set_xlabel('X Label')
+# ax.set_ylabel('Y Label')
+# ax.set_zlabel('Z Label')
+
+# plt.show()
