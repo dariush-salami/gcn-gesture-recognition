@@ -18,14 +18,6 @@ class MuConv(MessagePassing):
         reset(self.global_nn)
 
     def forward(self, x, pos, edge_index):
-        r"""
-        Args:
-            x (Tensor): The node feature matrix. Allowed to be :obj:`None`.
-            pos (Tensor or tuple): The node position matrix. Either given as
-                tensor for use in general message passing or as tuple for use
-                in message passing in bipartite graphs.
-            edge_index (LongTensor): The edge indices.
-        """
         if torch.is_tensor(pos):  # Add self-loops for symmetric adjacencies.
             edge_index, _ = remove_self_loops(edge_index)
             edge_index, _ = add_self_loops(edge_index, num_nodes=pos.size(0))
@@ -66,21 +58,13 @@ class SigmaConv(MessagePassing):
         reset(self.global_nn)
 
     def forward(self, x, pos, edge_index):
-        r"""
-        Args:
-            x (Tensor): The node feature matrix. Allowed to be :obj:`None`.
-            pos (Tensor or tuple): The node position matrix. Either given as
-                tensor for use in general message passing or as tuple for use
-                in message passing in bipartite graphs.
-            edge_index (LongTensor): The edge indices.
-        """
         if torch.is_tensor(pos):  # Add self-loops for symmetric adjacencies.
             edge_index, _ = remove_self_loops(edge_index)
             edge_index, _ = add_self_loops(edge_index, num_nodes=pos.size(0))
 
         return self.propagate(edge_index, x=x, pos=pos)
 
-    def message(self,x_i,  x_j, pos_i, pos_j):
+    def message(self, x_j,x_i, pos_i, pos_j):
         if x_j is None:
             msg = pos_j - pos_i
         if x_j is not None:
