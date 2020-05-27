@@ -1,7 +1,7 @@
 import os.path as osp
 from torch_geometric.datasets import ModelNet, ShapeNet
 from layer import MuConv,SigmaConv
-from torch.nn import Sequential as Seq, Linear as Lin, ReLU, BatchNorm1d as BN, Dropout
+from torch.nn import Sequential as Seq, Linear as Lin, ReLU,LeakyReLU ,BatchNorm1d as BN, Dropout
 import torch_geometric.transforms as T
 from torch_geometric.data import DataLoader
 import torch
@@ -11,7 +11,7 @@ import numpy as np
 from neuralnet_pytorch.metrics import chamfer_loss
 def MLP(channels, batch_norm=True):
     return Seq(*[
-        Seq(Lin(channels[i - 1], channels[i]), ReLU(), BN(channels[i]))
+        Seq(Lin(channels[i - 1], channels[i]), LeakyReLU(), BN(channels[i]))
         for i in range(1, len(channels))
     ])
 
