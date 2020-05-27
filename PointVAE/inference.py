@@ -75,7 +75,7 @@ for data in test_loader:
         pred = model(data)
         generated_data.append({
             'pred': pred[0].cpu().numpy(),
-            'true': data.pos.numpy()
+            'true': data.pos.cpu().numpy()
         })
         print(pred[0])
 with open('augmented_data.pkl', 'wb') as handle:
