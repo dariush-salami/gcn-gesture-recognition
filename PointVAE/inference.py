@@ -72,10 +72,12 @@ generated_data = []
 for data in test_loader:
     data = data.to(device)
     with torch.no_grad():
+        pred = model(data)
         generated_data.append({
-            'pred': model(data)[0],
+            'pred': pred[0],
             'true': data.pos
         })
+        print(pred[0])
 with open('augmented_data.pkl', 'wb') as handle:
     pickle.dump(generated_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
 print('Model loaded successfully :)')
