@@ -1,8 +1,8 @@
 from torch_geometric.nn import MessagePassing
-from torch_geometric.utils import add_self_loops,remove_self_loops
+from torch_geometric.utils import add_self_loops, remove_self_loops
 import torch
-
 from torch_geometric.nn.inits import reset
+
 
 class MuConv(MessagePassing):
     def __init__(self, local_nn=None, global_nn=None, **kwargs):
@@ -43,7 +43,6 @@ class MuConv(MessagePassing):
             self.__class__.__name__, self.local_nn, self.global_nn)
 
 
-
 class SigmaConv(MessagePassing):
     def __init__(self, local_nn=None, global_nn=None, **kwargs):
         super(SigmaConv, self).__init__(aggr='max', **kwargs)
@@ -64,7 +63,7 @@ class SigmaConv(MessagePassing):
 
         return self.propagate(edge_index, x=x, pos=pos)
 
-    def message(self, x_j,x_i, pos_i, pos_j):
+    def message(self, x_j, x_i, pos_i, pos_j):
         if x_j is None:
             msg = pos_j - pos_i
         if x_j is not None:

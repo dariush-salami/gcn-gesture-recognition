@@ -1,3 +1,5 @@
+torch
 numpy
 scipy
 tqdm
+torch_geometric

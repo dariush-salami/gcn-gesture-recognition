@@ -1,3 +1,7 @@
 *.pyc
 datasets/ptb_char/*.pkl
 logs/
+data/
+PointVAE/trained_model/*
+.idea
+/PointVAE/.idea/
