@@ -74,7 +74,7 @@ for data in test_loader:
     with torch.no_grad():
         pred = model(data)
         generated_data.append({
-            'pred': pred[0].numpy(),
+            'pred': pred[0].cpu().numpy(),
             'true': data.pos.numpy()
         })
         print(pred[0])
