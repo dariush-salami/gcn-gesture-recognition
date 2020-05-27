@@ -9,7 +9,7 @@ from neuralnet_pytorch.metrics import chamfer_loss
 from torch_geometric.nn.inits import reset
 import torch.nn.functional as F
 from layer import MuConv, SigmaConv
-
+import pickle
 
 def MLP(channels, batch_norm=True):
     return Seq(*[
@@ -67,4 +67,15 @@ model = Net(0.5, 0.2).to(device)
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 model.load_state_dict(torch.load('./trained_model/pointVAECh.pt'))
+model.eval()
+generated_data = []
+for data in test_loader:
+    data = data.to(device)
+    with torch.no_grad():
+        generated_data.append({
+            'pred': model(data),
+            'true': data.pos
+        })
+with open('augmented_data.pkl', 'wb') as handle:
+    pickle.dump(generated_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
 print('Model loaded successfully :)')
