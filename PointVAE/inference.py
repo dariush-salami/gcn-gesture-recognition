@@ -74,8 +74,8 @@ for data in test_loader:
     with torch.no_grad():
         pred = model(data)
         generated_data.append({
-            'pred': pred[0],
-            'true': data.pos
+            'pred': pred[0].numpy(),
+            'true': data.pos.numpy()
         })
         print(pred[0])
 with open('augmented_data.pkl', 'wb') as handle:
