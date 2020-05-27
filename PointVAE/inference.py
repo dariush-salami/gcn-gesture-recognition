@@ -8,7 +8,7 @@ from torch_geometric.nn import radius_graph, global_max_pool
 from neuralnet_pytorch.metrics import chamfer_loss
 from torch_geometric.nn.inits import reset
 import torch.nn.functional as F
-from PointVAE.layer import MuConv, SigmaConv
+from layer import MuConv, SigmaConv
 
 
 def MLP(channels, batch_norm=True):
