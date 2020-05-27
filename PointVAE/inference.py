@@ -73,7 +73,7 @@ for data in test_loader:
     data = data.to(device)
     with torch.no_grad():
         generated_data.append({
-            'pred': model(data),
+            'pred': model(data)[0],
             'true': data.pos
         })
 with open('augmented_data.pkl', 'wb') as handle:
