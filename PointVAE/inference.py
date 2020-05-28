@@ -77,7 +77,8 @@ for data in test_loader:
             'pred': pred[0].cpu().numpy(),
             'true': data.pos.cpu().numpy()
         })
-        print(pred[0])
+        print('pred[0]', pred[0].shape)
+        print('data.pos', data.pos.shape)
 with open('augmented_data.pkl', 'wb') as handle:
     pickle.dump(generated_data, handle, protocol=pickle.HIGHEST_PROTOCOL)
 print('Model loaded successfully :)')
