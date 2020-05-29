@@ -96,4 +96,6 @@ for epoch in range(1, 201):
     loss = train()
     print('Epoch {:03d}, Loss: {:.4f}'.format(
         epoch, loss))
+    if epoch % 10 ==0:
+        torch.save(model.state_dict(),'./pointVAEChShape'+'{}'.format(epoch)+'.pt')
 
