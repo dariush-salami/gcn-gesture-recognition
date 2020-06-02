@@ -4,31 +4,29 @@ import torch
 from torch_geometric.nn.inits import reset
 
 
+
 class MuConv(MessagePassing):
     def __init__(self, local_nn=None, global_nn=None, **kwargs):
-        super(MuConv, self).__init__(aggr='mean', **kwargs)
+        super(MuConv, self).__init__(aggr='add', **kwargs)
 
         self.local_nn = local_nn
         self.global_nn = global_nn
 
-        self.reset_parameters()
+        # self.reset_parameters()
 
     def reset_parameters(self):
         reset(self.local_nn)
         reset(self.global_nn)
 
-    def forward(self, x, pos, edge_index):
-        if torch.is_tensor(pos):  # Add self-loops for symmetric adjacencies.
-            edge_index, _ = remove_self_loops(edge_index)
-            edge_index, _ = add_self_loops(edge_index, num_nodes=pos.size(0))
+    def forward(self, x, edge_index):
+        # Add self-loops for symmetric adjacencies.
+        edge_index, _ = remove_self_loops(edge_index)
+        edge_index, _ = add_self_loops(edge_index, num_nodes=x.size(0))
 
-        return self.propagate(edge_index, x=x, pos=pos)
+        return self.propagate(edge_index, x=x)
 
-    def message(self, x_j, pos_i, pos_j):
-        if x_j is None:
-            msg = pos_j
-        else:
-            msg = x_j
+    def message(self, x_j):
+        msg = x_j
         if self.local_nn is not None:
             msg = self.local_nn(msg)
         return msg
@@ -45,29 +43,27 @@ class MuConv(MessagePassing):
 
 class SigmaConv(MessagePassing):
     def __init__(self, local_nn=None, global_nn=None, **kwargs):
-        super(SigmaConv, self).__init__(aggr='max', **kwargs)
+        super(SigmaConv, self).__init__(aggr='add', **kwargs)
 
         self.local_nn = local_nn
         self.global_nn = global_nn
 
-        self.reset_parameters()
+        # self.reset_parameters()
 
     def reset_parameters(self):
         reset(self.local_nn)
         reset(self.global_nn)
 
-    def forward(self, x, pos, edge_index):
-        if torch.is_tensor(pos):  # Add self-loops for symmetric adjacencies.
-            edge_index, _ = remove_self_loops(edge_index)
-            edge_index, _ = add_self_loops(edge_index, num_nodes=pos.size(0))
+    def forward(self, x, edge_index):
+        # Add self-loops for symmetric adjacencies.
+        edge_index, _ = remove_self_loops(edge_index)
+        edge_index, _ = add_self_loops(edge_index, num_nodes=x.size(0))
 
-        return self.propagate(edge_index, x=x, pos=pos)
+        return self.propagate(edge_index, x=x)
 
-    def message(self, x_j, x_i, pos_i, pos_j):
-        if x_j is None:
-            msg = pos_j - pos_i
-        if x_j is not None:
-            msg = x_j - x_i
+    def message(self, x_j, x_i):
+
+        msg = x_j - x_i
         if self.local_nn is not None:
             msg = self.local_nn(msg)
         return msg
